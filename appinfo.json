@@ -1,0 +1,27 @@
+{
+    "appKeys": {
+        "dummy": 0
+    },
+    "capabilities": [
+        ""
+    ],
+    "companyName": "VideoLAN",
+    "enableMultiJS": true,
+    "longName": "watchface",
+    "projectType": "native",
+    "resources": {
+        "media": []
+    },
+    "sdkVersion": "3",
+    "shortName": "watchface",
+    "targetPlatforms": [
+        "aplite",
+        "basalt",
+        "chalk"
+    ],
+    "uuid": "5447306c-a08f-469e-9cfd-58eba3622b3c",
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": true
+    }
+}
