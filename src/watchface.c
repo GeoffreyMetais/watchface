@@ -21,8 +21,6 @@ static void main_window_load(Window *window) {
   text_layer_set_background_color(s_date_layer, GColorClear);
   text_layer_set_text_color(s_time_layer, GColorWhite);
   text_layer_set_text_color(s_date_layer, GColorWhite);
-  text_layer_set_text(s_time_layer, "00:00");
-  text_layer_set_text(s_date_layer, "Lundi 02 Mai");
   text_layer_set_font(s_time_layer, fonts_get_system_font(FONT_KEY_ROBOTO_BOLD_SUBSET_49));
   text_layer_set_font(s_date_layer, fonts_get_system_font(FONT_KEY_ROBOTO_CONDENSED_21));
   text_layer_set_text_alignment(s_time_layer, GTextAlignmentCenter);
@@ -37,26 +35,24 @@ static void main_window_unload(Window *window) {
   text_layer_destroy(s_time_layer);
 }
 
-static void update_time(struct tm *tick_time) {
-  // Get a tm structure
-  if (tick_time == NULL) {
-    tick_time = localtime(&(time_t){ time(NULL) });
-  }
-
-  // Write the current hours and minutes into a buffer
-  static char s_buffer[8];
-  strftime(s_buffer, sizeof(s_buffer), clock_is_24h_style() ?
-                                          "%H:%M" : "%I:%M", tick_time);
-  // Display this time on the TextLayer
-  text_layer_set_text(s_time_layer, s_buffer);
-
+static void update_date(struct tm *tick_time) {
   static char s_date_buffer[20];
   strftime(s_date_buffer, sizeof(s_date_buffer), "%a %e %h", tick_time);
-  // Display this time on the TextLayer
   text_layer_set_text(s_date_layer, s_date_buffer);
 }
 
-static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
+static void update_time(struct tm *tick_time) {
+  static char s_buffer[8];
+  strftime(s_buffer, sizeof(s_buffer), clock_is_24h_style() ?
+                                          "%H:%M" : "%I:%M", tick_time);
+  text_layer_set_text(s_time_layer, s_buffer);
+}
+
+static void tick_handler_date(struct tm *tick_time, TimeUnits units_changed) {
+  update_date(tick_time);
+}
+
+static void tick_handler_time(struct tm *tick_time, TimeUnits units_changed) {
   update_time(tick_time);
 }
 
@@ -68,8 +64,12 @@ static void init(void) {
     .unload = main_window_unload
   });
   window_stack_push(s_main_window, true);
-  tick_timer_service_subscribe(MINUTE_UNIT, tick_handler);
-  update_time(NULL);
+  tick_timer_service_subscribe(MINUTE_UNIT, tick_handler_time);
+  tick_timer_service_subscribe(DAY_UNIT, tick_handler_date);
+  
+  struct tm *tick_time = localtime(&(time_t){ time(NULL) });
+  update_time(tick_time);
+  update_date(tick_time);
 }
 
 static void deinit(void) {
