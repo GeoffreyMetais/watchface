@@ -33,10 +33,11 @@ static void main_window_load(Window *window) {
 
 static void main_window_unload(Window *window) {
   text_layer_destroy(s_time_layer);
+  text_layer_destroy(s_date_layer);
 }
 
 static void update_date(struct tm *tick_time) {
-  static char s_date_buffer[20];
+  static char s_date_buffer[12];
   strftime(s_date_buffer, sizeof(s_date_buffer), "%a %e %h", tick_time);
   text_layer_set_text(s_date_layer, s_date_buffer);
 }
