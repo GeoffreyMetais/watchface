@@ -36,25 +36,18 @@ static void main_window_unload(Window *window) {
   text_layer_destroy(s_date_layer);
 }
 
-static void update_date(struct tm *tick_time) {
-  static char s_date_buffer[12];
-  strftime(s_date_buffer, sizeof(s_date_buffer), "%a %e %h", tick_time);
-  text_layer_set_text(s_date_layer, s_date_buffer);
-}
-
-static void update_time(struct tm *tick_time) {
-  static char s_buffer[8];
-  strftime(s_buffer, sizeof(s_buffer), clock_is_24h_style() ?
+static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
+  if (units_changed & DAY_UNIT) {
+    static char s_date_buffer[12];
+    strftime(s_date_buffer, sizeof(s_date_buffer), "%a %e %h", tick_time);
+    text_layer_set_text(s_date_layer, s_date_buffer);
+  }
+  if (units_changed & MINUTE_UNIT) {
+    static char s_buffer[8];
+    strftime(s_buffer, sizeof(s_buffer), clock_is_24h_style() ?
                                           "%H:%M" : "%I:%M", tick_time);
-  text_layer_set_text(s_time_layer, s_buffer);
-}
-
-static void tick_handler_date(struct tm *tick_time, TimeUnits units_changed) {
-  update_date(tick_time);
-}
-
-static void tick_handler_time(struct tm *tick_time, TimeUnits units_changed) {
-  update_time(tick_time);
+    text_layer_set_text(s_time_layer, s_buffer);
+  }
 }
 
 static void init(void) {
@@ -65,12 +58,10 @@ static void init(void) {
     .unload = main_window_unload
   });
   window_stack_push(s_main_window, true);
-  tick_timer_service_subscribe(MINUTE_UNIT, tick_handler_time);
-  tick_timer_service_subscribe(DAY_UNIT, tick_handler_date);
+  tick_timer_service_subscribe(MINUTE_UNIT, tick_handler);
   
-  struct tm *tick_time = localtime(&(time_t){ time(NULL) });
-  update_time(tick_time);
-  update_date(tick_time);
+  //struct tm *tick_time = localtime(&(time_t){ time(NULL) });
+  tick_handler(localtime(&(time_t){ time(NULL) }), MINUTE_UNIT|DAY_UNIT);
 }
 
 static void deinit(void) {
