@@ -1,4 +1,5 @@
 #include <pebble.h>
+#include "localization.h"
 
 static Window *s_main_window;
 static TextLayer *s_time_layer;
@@ -39,19 +40,18 @@ static void main_window_unload(Window *window) {
 static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
   if (units_changed & DAY_UNIT) {
     static char s_date_buffer[12];
-    strftime(s_date_buffer, sizeof(s_date_buffer), "%a %e %h", tick_time);
+    strftime(s_date_buffer, sizeof(s_date_buffer), get_date_format(), tick_time);
     text_layer_set_text(s_date_layer, s_date_buffer);
   }
   if (units_changed & MINUTE_UNIT) {
     static char s_buffer[8];
-    strftime(s_buffer, sizeof(s_buffer), clock_is_24h_style() ?
-                                          "%H:%M" : "%I:%M", tick_time);
+    strftime(s_buffer, sizeof(s_buffer), get_time_format() , tick_time);
     text_layer_set_text(s_time_layer, s_buffer);
   }
 }
 
 static void init(void) {
-  setlocale(LC_ALL, "");
+  localization_setup();
   s_main_window = window_create();
   window_set_window_handlers(s_main_window, (WindowHandlers) {
     .load = main_window_load,
