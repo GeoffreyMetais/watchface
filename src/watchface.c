@@ -1,5 +1,5 @@
 #include <pebble.h>
-#include "localization.h"
+#include "intl/localization.h"
 
 static Window *s_main_window;
 static TextLayer *s_time_layer;
