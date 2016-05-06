@@ -21,13 +21,8 @@ static void bluetooth_callback(bool connected) {
 }
 
 static void init(void) {
+  main_window_setup();
   localization_setup();
-  s_main_window = window_create();
-  window_set_window_handlers(s_main_window, (WindowHandlers) {
-    .load = main_window_load,
-    .unload = main_window_unload
-  });
-  window_stack_push(s_main_window, true);
   tick_timer_service_subscribe(MINUTE_UNIT, tick_handler);
   tick_handler(localtime(&(time_t){ time(NULL) }), MINUTE_UNIT|DAY_UNIT);
 

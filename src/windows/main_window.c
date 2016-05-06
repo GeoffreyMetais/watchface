@@ -1,6 +1,6 @@
 #include "main_window.h"
 
-void main_window_load(Window *window) {
+static void main_window_load(Window *window) {
   // Get information about the Window
   Layer *window_layer = window_get_root_layer(window);
   GRect bounds = layer_get_bounds(window_layer);
@@ -35,9 +35,18 @@ void main_window_load(Window *window) {
   layer_add_child(window_get_root_layer(window), bitmap_layer_get_layer(s_bitmap_layer));
 }
 
-void main_window_unload(Window *window) {
+static void main_window_unload(Window *window) {
   text_layer_destroy(s_time_layer);
   text_layer_destroy(s_date_layer);
   gbitmap_destroy(s_bitmap);
   bitmap_layer_destroy(s_bitmap_layer);
+}
+
+void main_window_setup(){
+  s_main_window = window_create();
+  window_set_window_handlers(s_main_window, (WindowHandlers) {
+    .load = main_window_load,
+    .unload = main_window_unload
+  });
+  window_stack_push(s_main_window, true);
 }
