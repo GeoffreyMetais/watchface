@@ -2,16 +2,17 @@
 
 void localization_setup(void) {
   sys_locale = setlocale(LC_ALL, "");
+  if (!strcmp("en_US", sys_locale) || !strcmp("en_CN", sys_locale) || !strcmp("en_TW", sys_locale))
+    date_format = "%a %h %e";
+  else
+    date_format = "%a %e %h";
+  time_format = clock_is_24h_style() ? "%H:%M" : "%I:%M";
 }
 
 char * get_time_format(void) {
-  return clock_is_24h_style() ? "%H:%M" : "%I:%M";
+  return time_format;
 }
 
 char * get_date_format(void) {
-  if (strcmp("en_US", sys_locale) == 0)
-    return "%a %h %e";
-  else
-    return "%a %e %h";
-  
+  return date_format;
 }

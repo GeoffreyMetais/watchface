@@ -1,7 +1,7 @@
 #pragma once
 #include <pebble.h>
 
-char * sys_locale;
+static char * sys_locale, *date_format, *time_format;
 
 void localization_setup(void);
 char * get_time_format(void);
