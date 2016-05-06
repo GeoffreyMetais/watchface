@@ -25,9 +25,19 @@ void main_window_load(Window *window) {
   // Add it as a child layer to the Window's root layer
   layer_add_child(window_layer, text_layer_get_layer(s_time_layer));
   layer_add_child(window_layer, text_layer_get_layer(s_date_layer));
+
+  // Disconnected icon
+  s_bitmap = gbitmap_create_with_resource(RESOURCE_ID_DISCONNECTED);
+  s_bitmap_layer = bitmap_layer_create(GRect(PBL_IF_ROUND_ELSE(55, 5), 5, 16, 16));
+  bitmap_layer_set_compositing_mode(s_bitmap_layer, GCompOpSet);
+  bitmap_layer_set_bitmap(s_bitmap_layer, s_bitmap);
+  layer_set_hidden((Layer *)s_bitmap_layer, connection_service_peek_pebble_app_connection());
+  layer_add_child(window_get_root_layer(window), bitmap_layer_get_layer(s_bitmap_layer));
 }
 
 void main_window_unload(Window *window) {
   text_layer_destroy(s_time_layer);
   text_layer_destroy(s_date_layer);
+  gbitmap_destroy(s_bitmap);
+  bitmap_layer_destroy(s_bitmap_layer);
 }

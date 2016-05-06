@@ -15,6 +15,11 @@ static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
   }
 }
 
+static void bluetooth_callback(bool connected) {
+  layer_set_hidden((Layer *)s_bitmap_layer, connected);
+  vibes_double_pulse();
+}
+
 static void init(void) {
   localization_setup();
   s_main_window = window_create();
@@ -24,9 +29,11 @@ static void init(void) {
   });
   window_stack_push(s_main_window, true);
   tick_timer_service_subscribe(MINUTE_UNIT, tick_handler);
-  
-  //struct tm *tick_time = localtime(&(time_t){ time(NULL) });
   tick_handler(localtime(&(time_t){ time(NULL) }), MINUTE_UNIT|DAY_UNIT);
+
+  connection_service_subscribe((ConnectionHandlers) {
+    .pebble_app_connection_handler = bluetooth_callback
+  });
 }
 
 static void deinit(void) {

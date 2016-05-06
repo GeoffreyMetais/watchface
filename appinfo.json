@@ -10,7 +10,14 @@
     "longName": "watchface",
     "projectType": "native",
     "resources": {
-        "media": []
+        "media": [
+	  {
+	    "type": "bitmap",
+	    "name": "DISCONNECTED",
+	    "file": "cellexclaim.png",
+	    "memoryFormat": "Smallest"
+	  }
+	]
     },
     "sdkVersion": "3",
     "shortName": "watchface",
