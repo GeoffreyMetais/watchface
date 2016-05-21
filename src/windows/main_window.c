@@ -9,7 +9,7 @@ static void main_window_load(Window *window) {
   s_time_layer = text_layer_create(
       GRect(0, PBL_IF_ROUND_ELSE(48, 42), bounds.size.w, 50));
   s_date_layer = text_layer_create(
-      GRect(0, PBL_IF_ROUND_ELSE(98, 92), bounds.size.w, 30));
+      GRect(0, PBL_IF_ROUND_ELSE(103, 97), bounds.size.w, 30));
 
   // Improve the layout to be more like a watchface
   window_set_background_color(window, GColorBlack);
@@ -17,7 +17,7 @@ static void main_window_load(Window *window) {
   text_layer_set_background_color(s_date_layer, GColorClear);
   text_layer_set_text_color(s_time_layer, GColorWhite);
   text_layer_set_text_color(s_date_layer, GColorWhite);
-  text_layer_set_font(s_time_layer, fonts_get_system_font(FONT_KEY_ROBOTO_BOLD_SUBSET_49));
+  text_layer_set_font(s_time_layer, fonts_get_system_font(FONT_KEY_BITHAM_42_LIGHT));
   text_layer_set_font(s_date_layer, fonts_get_system_font(FONT_KEY_ROBOTO_CONDENSED_21));
   text_layer_set_text_alignment(s_time_layer, GTextAlignmentCenter);
   text_layer_set_text_alignment(s_date_layer, GTextAlignmentCenter);
