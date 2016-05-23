@@ -1,0 +1,22 @@
+[
+  { 
+    "type": "heading", 
+    "defaultValue": "SmartFace Features" 
+  }, 
+  { 
+    "type": "toggle", 
+      "appKey": "AppKeyPulse",
+      "label": "Pulse on watch (dis)connected",
+      "defaultValue": true
+  }, 
+  { 
+    "type": "toggle", 
+      "appKey": "AppKeyDisconnectIcon",
+      "label": "Show disconnected icon",
+      "defaultValue": true
+  },
+  {
+    "type": "submit",
+    "defaultValue": "Save"
+  }
+]
