@@ -31,7 +31,6 @@ static void main_window_load(Window *window) {
   s_bitmap_layer = bitmap_layer_create(GRect(PBL_IF_ROUND_ELSE(55, 5), 5, 16, 16));
   bitmap_layer_set_compositing_mode(s_bitmap_layer, GCompOpSet);
   bitmap_layer_set_bitmap(s_bitmap_layer, s_bitmap);
-  layer_set_hidden((Layer *)s_bitmap_layer, connection_service_peek_pebble_app_connection());
   layer_add_child(window_get_root_layer(window), bitmap_layer_get_layer(s_bitmap_layer));
 }
 

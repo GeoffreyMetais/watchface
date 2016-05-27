@@ -9,10 +9,13 @@ void setup_events_services(void) {
   tick_timer_service_subscribe(MINUTE_UNIT, tick_handler);
   tick_handler(localtime(&(time_t){ time(NULL) }), MINUTE_UNIT|DAY_UNIT);
 
+  pulse = get_pulse_pref();
+  bt_icon = get_bt_icon_pref();
   if (pulse || bt_icon)
     connection_service_subscribe((ConnectionHandlers) {
       .pebble_app_connection_handler = bluetooth_callback
   });
+  layer_set_hidden((Layer *)s_bitmap_layer, !bt_icon || connection_service_peek_pebble_app_connection());
 }
 
 void bluetooth_callback(bool connected) {
@@ -45,6 +48,8 @@ static void inbox_received_handler(DictionaryIterator *iter, void *context) {
   if (bt_icon_t)
     bt_icon = bt_icon_t->value->int32 == 1;
 
-  // App should now update to take the user's preferences into account
+  persist_write_bool(DataKeyPulse, pulse);
+  persist_write_bool(DataKeyBtIcon, bt_icon);
+
   setup_events_services();
 }

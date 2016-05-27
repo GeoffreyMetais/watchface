@@ -1,10 +1,11 @@
 #pragma once
 #include <pebble.h>
+#include "include/data.h"
 #include "windows/main_window.h"
 #include "intl/localization.h"
-#include "user_preferences.h"
 
-static bool pulse = true, bt_icon = true;
+static bool pulse, bt_icon;
+
 void init_comm(void);
 void setup_events_services(void);
 void bluetooth_callback(bool connected);

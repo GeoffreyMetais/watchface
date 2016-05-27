@@ -4,9 +4,9 @@
 #include "include/events_manager.h"
 
 static void init(void) {
-  main_window_setup();
   localization_setup();
   setup_events_services();
+  main_window_setup();
   init_comm();
 }
 
