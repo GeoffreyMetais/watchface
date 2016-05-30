@@ -1,6 +1,6 @@
 #pragma once
 #include <pebble.h>
-#include "include/data.h"
+#include "data.h"
 #include "windows/main_window.h"
 #include "intl/localization.h"
 

@@ -1,7 +1,7 @@
 #include <pebble.h>
-#include "include/windows/main_window.h"
-#include "include/intl/localization.h"
-#include "include/events_manager.h"
+#include "windows/main_window.h"
+#include "intl/localization.h"
+#include "events_manager.h"
 
 static void init(void) {
   localization_setup();

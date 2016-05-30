@@ -1,4 +1,4 @@
-#include "include/events_manager.h"
+#include "events_manager.h"
 
 void init_comm(void) {
   app_message_register_inbox_received(inbox_received_handler);

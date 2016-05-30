@@ -13,3 +13,6 @@ typedef enum {
   DataKeyPulse = 0,
   DataKeyBtIcon = 1,
 } DataKey;
+
+bool get_pulse_pref();
+bool get_bt_icon_pref();

@@ -1,4 +1,4 @@
-#include "../include/windows/main_window.h"
+#include "main_window.h"
 
 static void main_window_load(Window *window) {
   // Get information about the Window

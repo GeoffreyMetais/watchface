@@ -1,4 +1,4 @@
-#include "../include/intl/localization.h"
+#include "localization.h"
 
 void localization_setup(void) {
   sys_locale = setlocale(LC_ALL, "");
