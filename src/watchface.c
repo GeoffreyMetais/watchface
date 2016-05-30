@@ -6,7 +6,7 @@
 static void init(void) {
   localization_setup();
   main_window_setup();
-  setup_events_services();
+  setup_events_services(NULL);
   init_comm();
 }
 
