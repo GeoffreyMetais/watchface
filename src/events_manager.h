@@ -4,6 +4,8 @@
 #include "windows/main_window.h"
 #include "intl/localization.h"
 
+#define TIME_FONT_BUFFER_SIZE 40
+
 static bool pulse, bt_icon;
 
 void init_comm(void);

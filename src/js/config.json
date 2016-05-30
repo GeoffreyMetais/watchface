@@ -1,19 +1,68 @@
 [
-  { 
+  {
     "type": "heading", 
     "defaultValue": "SmartFace Features" 
-  }, 
-  { 
-    "type": "toggle", 
-      "appKey": "AppKeyPulse",
-      "label": "Pulse on watch (dis)connected",
-      "defaultValue": true
-  }, 
-  { 
-    "type": "toggle", 
-      "appKey": "AppKeyDisconnectIcon",
-      "label": "Show disconnected icon",
-      "defaultValue": true
+  },
+  {
+    "type": "section",
+    "items": [
+      {
+	"type": "heading",
+	"defaultValue": "Bluetooth notifications"
+      },
+      {
+	"type": "toggle",
+	"appKey": "AppKeyPulse",
+	"label": "Pulse on watch (dis)connected",
+	"defaultValue": true
+      },
+      {
+	"type": "toggle",
+	"appKey": "AppKeyDisconnectIcon",
+	"label": "Show disconnected icon",
+	"defaultValue": true
+      }
+    ]
+  },
+  {
+    "type": "section",
+    "items": [
+      {
+	"type": "heading",
+	"defaultValue": "Watchface display"
+      },
+      {
+	"type": "select",
+	"appKey": "AppKeyTimeFont",
+	"defaultValue": "RESOURCE_ID_BITHAM_42_LIGHT",
+	"label": "Font for Time display",
+	"options": [
+	  {
+	    "label": "Bitham 42 light",
+	    "value": "RESOURCE_ID_BITHAM_42_LIGHT"
+	  },
+	  {
+	    "label": "Bitham 42 medium",
+	    "value": "RESOURCE_ID_BITHAM_42_MEDIUM_NUMBERS"
+	  },
+	  {
+	    "label": "Roboto 49 bold",
+	    "value": "RESOURCE_ID_ROBOTO_BOLD_SUBSET_49"
+	  },
+	  {
+	    "label": "Leco 42",
+	    "value": "RESOURCE_ID_LECO_42_NUMBERS"
+	  },
+	  {
+	    "label": "Leco 38 bold",
+	    "value": "RESOURCE_ID_LECO_38_BOLD_NUMBERS" 
+	  }
+	],
+	"attributes": {
+	  "required": "required"
+	}
+      }
+    ]
   },
   {
     "type": "submit",

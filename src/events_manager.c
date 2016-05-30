@@ -16,6 +16,10 @@ void setup_events_services(void) {
       .pebble_app_connection_handler = bluetooth_callback
   });
   layer_set_hidden((Layer *)s_bitmap_layer, !bt_icon || connection_service_peek_pebble_app_connection());
+
+  char buffer[TIME_FONT_BUFFER_SIZE];
+  get_time_font_pref(buffer, TIME_FONT_BUFFER_SIZE);
+  text_layer_set_font(s_time_layer, fonts_get_system_font(buffer));
 }
 
 void bluetooth_callback(bool connected) {
@@ -47,6 +51,10 @@ static void inbox_received_handler(DictionaryIterator *iter, void *context) {
   Tuple *bt_icon_t = dict_find(iter, AppKeyDisconnectIcon);
   if (bt_icon_t)
     bt_icon = bt_icon_t->value->int32 == 1;
+
+  Tuple *time_font_t = dict_find(iter, AppKeyTimeFont);
+  if (time_font_t)
+    persist_write_string(DataKeyTimeFont, time_font_t->value->cstring);
 
   persist_write_bool(DataKeyPulse, pulse);
   persist_write_bool(DataKeyBtIcon, bt_icon);
