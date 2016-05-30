@@ -17,5 +17,5 @@ void get_time_font_pref(char *buffer, int buffer_size) {
     persist_read_string(DataKeyTimeFont, buffer, buffer_size);
     return;
   }
-  buffer = TIME_FONT_DEFAUT;
+  strcpy(buffer, TIME_FONT_DEFAUT);
 }
