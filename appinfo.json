@@ -34,6 +34,7 @@
     "appKeys": {
         "AppKeyPulse": 0,
         "AppKeyDisconnectIcon": 1,
-        "AppKeyTimeFont": 2
+        "AppKeyTimeFont": 2,
+        "AppKeyDateFont": 3
     }
 }

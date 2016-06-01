@@ -35,7 +35,7 @@
 	"type": "select",
 	"appKey": "AppKeyTimeFont",
 	"defaultValue": "RESOURCE_ID_BITHAM_42_LIGHT",
-	"label": "Font for Time display",
+	"label": "Time display font",
 	"options": [
 	  {
 	    "label": "Bitham 42 light",
@@ -56,6 +56,33 @@
 	  {
 	    "label": "Leco 38 bold",
 	    "value": "RESOURCE_ID_LECO_38_BOLD_NUMBERS" 
+	  }
+	],
+	"attributes": {
+	  "required": "required"
+	}
+      },
+      {
+	"type": "select",
+	"appKey": "AppKeyDateFont",
+	"defaultValue": "RESOURCE_ID_ROBOTO_CONDENSED_21",
+	"label": "Date display font",
+	"options": [
+	  {
+	    "label": "Gothic 28",
+	    "value": "RESOURCE_ID_GOTHIC_28"
+	  },
+	  {
+	    "label": "Gothic 24 bold",
+	    "value": "RESOURCE_ID_GOTHIC_24_BOLD"
+	  },
+	  {
+	    "label": "Roboto condensed 21",
+	    "value": "RESOURCE_ID_ROBOTO_CONDENSED_21"
+	  },
+	  {
+	    "label": "Gothic 18 bold",
+	    "value": "RESOURCE_ID_GOTHIC_18_BOLD"
 	  }
 	],
 	"attributes": {

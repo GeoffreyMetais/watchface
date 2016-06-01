@@ -2,11 +2,11 @@
 
 void init_comm(void) {
   app_message_register_inbox_received(inbox_received_handler);
-  app_message_open(64, 64);
+  app_message_open(128, 64);
 }
 
 void setup_events_services(DictionaryIterator *iter) {
-  char *time_font;
+  char *time_font, *date_font;
 
   if (iter == NULL) {
     tick_timer_service_subscribe(MINUTE_UNIT, tick_handler);
@@ -14,9 +14,12 @@ void setup_events_services(DictionaryIterator *iter) {
 
     pulse = get_pulse_pref();
     bt_icon = get_bt_icon_pref();
-    char buffer[TIME_FONT_BUFFER_SIZE];
-    get_time_font_pref(buffer, TIME_FONT_BUFFER_SIZE);
+    char buffer[FONT_BUFFER_SIZE];
+    get_time_font_pref(buffer, FONT_BUFFER_SIZE);
     time_font = buffer;
+    char date_buffer[FONT_BUFFER_SIZE];
+    get_date_font_pref(date_buffer, FONT_BUFFER_SIZE);
+    date_font = date_buffer;
   } else {
     // Read boolean preferences
     Tuple *pulse_t = dict_find(iter, AppKeyPulse);
@@ -31,6 +34,11 @@ void setup_events_services(DictionaryIterator *iter) {
     if (time_font_t)
       time_font = time_font_t->value->cstring;
     else time_font = TIME_FONT_DEFAUT;
+
+    Tuple *date_font_t = dict_find(iter, AppKeyDateFont);
+    if (date_font_t)
+      date_font = date_font_t->value->cstring;
+    else date_font = TIME_FONT_DEFAUT;
   }
 
   if (pulse || bt_icon)
@@ -43,6 +51,7 @@ void setup_events_services(DictionaryIterator *iter) {
   layer_set_hidden((Layer *)s_bitmap_layer, !bt_icon || connection_service_peek_pebble_app_connection());
 
   text_layer_set_font(s_time_layer, fonts_get_system_font(time_font));
+  text_layer_set_font(s_date_layer, fonts_get_system_font(date_font));
 }
 
 void bluetooth_callback(bool connected) {
@@ -80,4 +89,8 @@ static void inbox_received_handler(DictionaryIterator *iter, void *context) {
   Tuple *time_font_t = dict_find(iter, AppKeyTimeFont);
   if (time_font_t)
     persist_write_string(DataKeyTimeFont, time_font_t->value->cstring);
+
+  Tuple *date_font_t = dict_find(iter, AppKeyDateFont);
+  if (date_font_t)
+    persist_write_string(DataKeyDateFont, date_font_t->value->cstring);
 }

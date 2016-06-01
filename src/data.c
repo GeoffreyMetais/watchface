@@ -19,3 +19,11 @@ void get_time_font_pref(char *buffer, int buffer_size) {
   }
   strcpy(buffer, TIME_FONT_DEFAUT);
 }
+
+void get_date_font_pref(char *buffer, int buffer_size) {
+  if (persist_exists(DataKeyDateFont)){
+    persist_read_string(DataKeyDateFont, buffer, buffer_size);
+    return;
+  }
+  strcpy(buffer, DATE_FONT_DEFAUT);
+}

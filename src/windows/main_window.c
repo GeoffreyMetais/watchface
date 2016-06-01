@@ -17,8 +17,8 @@ static void main_window_load(Window *window) {
   text_layer_set_background_color(s_date_layer, GColorClear);
   text_layer_set_text_color(s_time_layer, GColorWhite);
   text_layer_set_text_color(s_date_layer, GColorWhite);
-  text_layer_set_font(s_time_layer, fonts_get_system_font(FONT_KEY_BITHAM_42_LIGHT));
-  text_layer_set_font(s_date_layer, fonts_get_system_font(FONT_KEY_ROBOTO_CONDENSED_21));
+  //text_layer_set_font(s_time_layer, fonts_get_system_font(FONT_KEY_BITHAM_42_LIGHT));
+  //text_layer_set_font(s_date_layer, fonts_get_system_font(FONT_KEY_ROBOTO_CONDENSED_21));
   text_layer_set_text_alignment(s_time_layer, GTextAlignmentCenter);
   text_layer_set_text_alignment(s_date_layer, GTextAlignmentCenter);
 
