@@ -7,9 +7,9 @@ static void main_window_load(Window *window) {
 
   // Create the TextLayer with specific bounds
   s_time_layer = text_layer_create(
-      GRect(0, PBL_IF_ROUND_ELSE(48, 42), bounds.size.w, 50));
+      GRect(0, TIME_Y, bounds.size.w, 50));
   s_date_layer = text_layer_create(
-      GRect(0, PBL_IF_ROUND_ELSE(103, 97), bounds.size.w, 30));
+      GRect(0, DATE_Y, bounds.size.w, 30));
 
   // Improve the layout to be more like a watchface
   window_set_background_color(window, GColorBlack);
@@ -28,7 +28,7 @@ static void main_window_load(Window *window) {
 
   // Disconnected icon
   s_bitmap = gbitmap_create_with_resource(RESOURCE_ID_DISCONNECTED);
-  s_bitmap_layer = bitmap_layer_create(GRect(PBL_IF_ROUND_ELSE(55, 5), 5, 16, 16));
+  s_bitmap_layer = bitmap_layer_create(GRect(BT_X, 5, 16, 16));
   bitmap_layer_set_compositing_mode(s_bitmap_layer, GCompOpSet);
   bitmap_layer_set_bitmap(s_bitmap_layer, s_bitmap);
   layer_add_child(window_get_root_layer(window), bitmap_layer_get_layer(s_bitmap_layer));
