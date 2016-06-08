@@ -25,7 +25,7 @@ static void inbox_received_handler(DictionaryIterator *iter, void *context) {
 
 void init_comm(void) {
   app_message_register_inbox_received(inbox_received_handler);
-  app_message_open(128, 64);
+  app_message_open(128, 0);
 }
 
 void setup_events_services(DictionaryIterator *iter) {
