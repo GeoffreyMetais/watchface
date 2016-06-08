@@ -1,5 +1,11 @@
 #include "main_window.h"
 
+static Window *s_main_window;
+static TextLayer *s_time_layer;
+static TextLayer *s_date_layer;
+static BitmapLayer *s_bitmap_layer;
+static GBitmap *s_bitmap;
+
 static void main_window_load(Window *window) {
   // Get information about the Window
   Layer *window_layer = window_get_root_layer(window);
@@ -48,4 +54,28 @@ void main_window_setup(){
     .unload = main_window_unload
   });
   window_stack_push(s_main_window, true);
+}
+
+void main_window_destroy(void) {
+  window_destroy(s_main_window);
+}
+
+void hide_bt(bool hide) {
+  layer_set_hidden((Layer *)s_bitmap_layer, hide);
+}
+
+void set_time_text(const char *text){
+  text_layer_set_text(s_time_layer, text);
+}
+
+void set_date_text(const char *text){
+  text_layer_set_text(s_date_layer, text);
+}
+
+void set_time_font(GFont font){
+  text_layer_set_font(s_time_layer, font);
+}
+
+void set_date_font(GFont font){
+  text_layer_set_font(s_date_layer, font);
 }

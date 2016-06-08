@@ -1,5 +1,7 @@
 #include "localization.h"
 
+static char * sys_locale, *date_format, *time_format;
+
 void localization_setup(void) {
   sys_locale = setlocale(LC_ALL, "");
   if (!strcmp("en_US", sys_locale) || !strcmp("en_CN", sys_locale) || !strcmp("en_TW", sys_locale))

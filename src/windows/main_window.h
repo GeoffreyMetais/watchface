@@ -11,12 +11,10 @@
   #define BT_X 5
 #endif
 
-Window *s_main_window;
-TextLayer *s_time_layer;
-TextLayer *s_date_layer;
-BitmapLayer *s_bitmap_layer;
-static GBitmap *s_bitmap;
-
-static void main_window_load(Window *window);
-static void main_window_unload(Window *window);
 void main_window_setup();
+void main_window_destroy(void);
+void hide_bt(bool);
+void set_time_text(const char *);
+void set_date_text(const char *);
+void set_time_font(GFont);
+void set_date_font(GFont);
